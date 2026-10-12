@@ -391,7 +391,7 @@ uint32_t ZLIB_INTERNAL adler32_simd_(  /* RVV */
   size_t head = len & (vl - 1);
   if (head > 0) {
     vuint8m2_t zero8 = __riscv_vmv_v_x_u8m2(0, vl);
-    vuint8m2_t in = __riscv_vle8_v_u8m2(buf, vl);
+    vuint8m2_t in = __riscv_vle8_v_u8m2(buf, head);
     in = __riscv_vslideup(zero8, in, vl - head, vl);
     vuint16m4_t in16 = __riscv_vwcvtu_x(in, vl);
     a_sum = in16;
